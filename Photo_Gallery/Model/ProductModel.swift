@@ -8,9 +8,16 @@
 import Foundation
 import UIKit
 
+enum ProductModelImageSource {
+    case local
+    case remote
+}
+
 struct ProductModel {
     var photoImage: UIImage?
     var photoTitle: String?
+    var imageSource: ProductModelImageSource = .local
+    var imageUrl: String? = ""
     
     func populatePhotos() -> [ProductModel] {
         let photos = [

@@ -1,0 +1,27 @@
+//
+//  PhotoNetworkModel.swift
+//  Photo_Gallery
+//
+//  Created by Jazilul Athoya on 13/04/22.
+//
+
+import Foundation
+
+// Airtable structure, "image" : image, "title" : string
+class PhotoNetworkModel: Codable {
+    var id: String = ""
+    var createdTime: String = ""
+    var fields: PhotoNetworkModelFields = PhotoNetworkModelFields()
+}
+
+class PhotoNetworkModelFields: Codable {
+    var title: String = ""
+    var image: [PhotoNetworkModelImage] = []
+}
+
+class PhotoNetworkModelImage: Codable {
+    var id: String = ""
+    var url: String = ""
+    var filename: String = ""
+    var type: String = ""
+}

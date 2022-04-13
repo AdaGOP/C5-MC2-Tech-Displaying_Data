@@ -13,6 +13,7 @@ private let reuseIdentifier = "collectionCell"
 
 class CollectionViewController: UICollectionViewController {
     let photoDAO = PhotoDAO()
+    let networkHelper = NetworkHelper()
     let product = ProductModel()
     var photos: [ProductModel] = []
     
@@ -30,6 +31,14 @@ class CollectionViewController: UICollectionViewController {
         photos = product.populatePhotos()
         let photosFromCoreData = photoDAO.fetchPhotos()
         photos.insert(contentsOf: photosFromCoreData, at: photos.count)
+        networkHelper.getPhotoRecord { [unowned self] photoNetwork in
+            let productModel = ProductModel(photoImage: nil, photoTitle: photoNetwork.fields.title, imageSource: .remote, imageUrl: photoNetwork.fields.image.first?.url)
+            self.photos.append(productModel)
+            let indexPath = IndexPath(row: photos.count - 1, section: 0)
+            DispatchQueue.main.async {
+                collectionView.insertItems(at: [indexPath])
+            }
+        }
     }
     
     private func setUpCollectionView() {
@@ -84,7 +93,13 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CollectionViewCell)!
         let chosenPhoto = photos[indexPath.row]
-        cell.photoImage.image = chosenPhoto.photoImage
+        
+        if chosenPhoto.imageSource == .remote, let url = URL(string: chosenPhoto.imageUrl ?? "") {
+            cell.photoImage.load(url: url)
+        } else {
+            cell.photoImage.image = chosenPhoto.photoImage
+        }
+        
         cell.photoTitle.text = chosenPhoto.photoTitle
         cell.backgroundColor = .systemGray6
         return cell
