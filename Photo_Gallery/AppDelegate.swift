@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // Core Data extension for persistance container
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "PhotoDataModel")
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "PhotoDataModel")
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Unable to load persistent stores: \(error)")

@@ -8,10 +8,11 @@
 import Foundation
 import UIKit
 import CoreData
+import CloudKit
 
 class CoreDataHelper {
     
-    let container: NSPersistentContainer!
+    let container: NSPersistentCloudKitContainer!
     let viewContext: NSManagedObjectContext!
     
     // Initalize container and context

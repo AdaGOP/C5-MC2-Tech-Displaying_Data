@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B5BEC2F27FD908F00889DAF /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BEC2E27FD908F00889DAF /* AddPhotoViewController.swift */; };
+		1BBFDE5C2835105300F69D63 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BBFDE5B2835105300F69D63 /* CloudKit.framework */; };
 		4637D67727F411E8007B7303 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637D67627F411E8007B7303 /* CollectionViewCell.swift */; };
 		4637D67927F44023007B7303 /* DetailPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637D67827F44023007B7303 /* DetailPhotoViewController.swift */; };
 		466F8C4C27FC3A260025E0F1 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8C4B27FC3A260025E0F1 /* ProductModel.swift */; };
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		1B5BEC2E27FD908F00889DAF /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
+		1BBFDE592835104400F69D63 /* Photo_Gallery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Photo_Gallery.entitlements; sourceTree = "<group>"; };
+		1BBFDE5B2835105300F69D63 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4637D67627F411E8007B7303 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		4637D67827F44023007B7303 /* DetailPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoViewController.swift; sourceTree = "<group>"; };
 		466F8C4B27FC3A260025E0F1 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
@@ -53,17 +56,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BBFDE5C2835105300F69D63 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BBFDE5A2835105300F69D63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BBFDE5B2835105300F69D63 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4677F4ED27EDB92000677D0F = {
 			isa = PBXGroup;
 			children = (
 				4677F4F827EDB92000677D0F /* Photo_Gallery */,
 				4677F4F727EDB92000677D0F /* Products */,
+				1BBFDE5A2835105300F69D63 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +91,7 @@
 		4677F4F827EDB92000677D0F /* Photo_Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				1BBFDE592835104400F69D63 /* Photo_Gallery.entitlements */,
 				46DF34FA27FC36FB00013C5B /* Model */,
 				46DF34F927FC36F600013C5B /* View */,
 				46DF34F827FC36EF00013C5B /* Controller */,
@@ -369,11 +383,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Photo_Gallery/Photo_Gallery.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KHN5V927Z7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Photo_Gallery/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app will need to access your photo collection";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -384,7 +400,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.davidgun.Photo-Gallery";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.haryanto.Photo-Gallery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -397,11 +413,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Photo_Gallery/Photo_Gallery.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KHN5V927Z7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Photo_Gallery/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app will need to access your photo collection";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -412,7 +430,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.davidgun.Photo-Gallery";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.haryanto.Photo-Gallery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
