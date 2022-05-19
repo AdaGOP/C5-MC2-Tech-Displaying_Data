@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import NotificationCenter
 
 
 private let reuseIdentifier = "collectionCell"
@@ -19,6 +19,7 @@ class CollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupObserverForNotification()
         setupData()
         setUpCollectionView()
     }
@@ -27,18 +28,40 @@ class CollectionViewController: UICollectionViewController {
         super.viewDidLayoutSubviews()
     }
     
+    private func setupObserverForNotification(){
+        
+        let persistentContainer = photoDAO.coreDataHelper.container
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(fetchChanges),
+            name: .NSPersistentStoreRemoteChange,
+            object: persistentContainer?.persistentStoreCoordinator
+        )
+    }
+    
+    @objc
+    func fetchChanges(){
+        print("Just received a NSPersistentStoreRemoteChange notification")
+//        setupData()
+        DispatchQueue.main.async {
+            self.setupData()
+            self.collectionView.reloadData()
+        }
+    }
+    
     private func setupData() {
-        photos = product.populatePhotos()
+//        photos = product.populatePhotos()
+        photos = []
         let photosFromCoreData = photoDAO.fetchPhotos()
         photos.insert(contentsOf: photosFromCoreData, at: photos.count)
-        networkHelper.getPhotoRecord { [unowned self] photoNetwork in
-            let productModel = ProductModel(photoImage: nil, photoTitle: photoNetwork.fields.title, imageSource: .remote, imageUrl: photoNetwork.fields.image.first?.url)
-            self.photos.append(productModel)
-            let indexPath = IndexPath(row: photos.count - 1, section: 0)
-            DispatchQueue.main.async {
-                collectionView.insertItems(at: [indexPath])
-            }
-        }
+//        networkHelper.getPhotoRecord { [unowned self] photoNetwork in
+//            let productModel = ProductModel(photoImage: nil, photoTitle: photoNetwork.fields.title, imageSource: .remote, imageUrl: photoNetwork.fields.image.first?.url)
+//            self.photos.append(productModel)
+//            let indexPath = IndexPath(row: photos.count - 1, section: 0)
+//            DispatchQueue.main.async {
+//                self.collectionView.insertItems(at: [indexPath])
+//            }
+//        }
     }
     
     private func setUpCollectionView() {
