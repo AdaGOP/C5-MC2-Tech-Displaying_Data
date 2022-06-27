@@ -27,9 +27,10 @@ class CollectionViewController: UICollectionViewController {
     }
     
     private func setupData() {
-        photos = product.populatePhotos()
+        photos.removeAll()
         let photosFromCoreData = photoDAO.fetchPhotos()
         photos.insert(contentsOf: photosFromCoreData, at: photos.count)
+        
     }
     
     private func setUpCollectionView() {
@@ -50,6 +51,12 @@ class CollectionViewController: UICollectionViewController {
         performSegue(withIdentifier: "addPhotoVC", sender: sender)
     }
     
+    @IBAction func pressFilterButton(_ sender: UIBarButtonItem) {
+        photos.removeAll()
+        let photosFromCoreData = photoDAO.filterPhotos()
+        photos.insert(contentsOf: photosFromCoreData, at: photos.count)
+        collectionView.reloadData()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailVC" {
             let nextView = segue.destination as? DetailPhotoViewController
@@ -64,8 +71,8 @@ class CollectionViewController: UICollectionViewController {
         guard let newPhotoVC = sender.source as? AddPhotoViewController else { return }
         let title = newPhotoVC.titleTextField.text
         let image = newPhotoVC.myPhoto.image
-        photos.append(ProductModel(photoImage: image, photoTitle: title))
         photoDAO.insertPhoto(title: title, image: image?.pngData())
+        setupData()
         collectionView.reloadData()
     }
 }

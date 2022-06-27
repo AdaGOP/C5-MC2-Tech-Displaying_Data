@@ -7,10 +7,12 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class PhotoDAO {
     
     let coreDataHelper = CoreDataHelper()
+    var filteredPhoto : [ProductModel] = []
     
     // Insert photo
     func insertPhoto(title: String?, image: Data?) {
@@ -31,6 +33,31 @@ class PhotoDAO {
                 photo.toProductModel()
             }
             return products
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return []
+    }
+    
+    // Filter some data
+    func filterPhotos() -> [ProductModel] {
+        let context = coreDataHelper.getBackgroundContext()
+        var filteredPhoto : [ProductModel] = []
+        
+        let fetchRequest = Photo.fetchRequest()
+        let query = "Clean"
+        fetchRequest.predicate = NSPredicate(format: "title CONTAINS %@", query)
+        
+        do {
+            let photos = try context.fetch(fetchRequest)
+            let _ = photos.map { photo in
+                if let data = photo.image {
+                filteredPhoto.append(ProductModel(photoImage: UIImage(data: data), photoTitle: photo.title))
+                }
+                
+            }
+            return filteredPhoto
         } catch {
             print(error.localizedDescription)
         }

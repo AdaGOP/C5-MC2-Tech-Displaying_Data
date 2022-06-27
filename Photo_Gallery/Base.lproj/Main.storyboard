@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Hg-jF-0hP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Hg-jF-0hP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -124,6 +124,11 @@
                         </cells>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Memories" id="5zJ-6d-5b2">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="fvZ-sj-kg9">
+                            <connections>
+                                <action selector="pressFilterButton:" destination="12l-rB-rcP" id="tNE-bl-LsS"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="Acg-3z-RhV">
                             <connections>
                                 <action selector="pressAddButton:" destination="12l-rB-rcP" id="HxD-6R-p3J"/>
@@ -148,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Msq-VJ-kBd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="241"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="241"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="243.5" id="YgQ-BX-iqY"/>
                                 </constraints>
@@ -172,7 +177,7 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Put your photo's title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LIL-hh-jP8">
-                                <rect key="frame" x="20" y="250.5" width="374" height="34"/>
+                                <rect key="frame" x="20" y="294.5" width="374" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="FNS-JV-Wtg"/>
                                 </constraints>
